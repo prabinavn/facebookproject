@@ -25,7 +25,7 @@ SECRET_KEY = '=@(7m#h)^sc@2r3xifb5f5tejz*x)@&4w6lrn679*zycy_s$ce'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['prabina-heroku.herokuapp.com']
 
 
 # Application definition
