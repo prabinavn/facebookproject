@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+               
+    <style>
+      .left-div{
+          background-color: white;
+          width: 200px;
+          margin-top: 20px;
+          margin-left: 8px;
+          float:left;
+      }
+      .center-div{
+           margin-top: 100px;
+           left:500px;
+           position: absolute;
+       }
+    </style>
+</head>
+<body>
+    <table width="100%" cellspacing="0">
+        <tr bgcolor="#3b5998">
+         <td width="40%"><img src="{% static 'logo.jpg' %}" width="300" height="100"></td></tr></table>   
+    <div class="left-div">
+            <br><br>
+            <a href="{% url 'facebookapp:profile' %}" style="color: blue;">View Profile</a>
+            <br><br>
+            <a href="{% url 'facebookapp:password' %}" style="color: blue;">Change password</a>
+    </div>
+    <div class="center-div">
+            {% block content %}
+    
+    
+            {% endblock %}
+    
+        </div>
+
+
+    <script>
+            $(document).ready(function(){
+                $('#buttonId').click(function(){
+                    currentpassword = $("#mypassword").val();
+                    newpassword     = $("#newpassword").val();
+                    $.ajax({
+                        url:'http://127.0.0.1:8000/facebookapp/password/',
+                        type:'POST',
+                        data:{
+                            csrfmiddlewaretoken :'{{ csrf_token }}',
+                            'mypassword'        :currentpassword,
+                            'newpassword'       :newpassword,
+                        },
+                        success:function(responce){
+                            alert(responce)
+                        },
+                        error:function(err){
+                            alert(err)
+                        }
+    
+                    });
+    
+                });
+    
+    $("#btneditprofile").click(function(){
+        $("#fname").removeAttr("readonly",false);
+        $("#lname").removeAttr("readonly",false);
+        $('#btneditprofile').hide();
+        $('#btnupdateprofile').show();
+        $("#profilepic").show();
+
+      });
+
+
+      
+   });
+           
+</script>
+
+
+    
+        
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+	<style>
+	   *{
+		   padding: 0px;
+		   margin: 0px;
+	   }
+	</style>
+</head>
+
+<body>
+
+	<table width="100%" cellspacing="0">
+	<tr bgcolor="#3b5998">
+		<td width="55%"><img src="{% static 'logo.jpg' %}" width="300"height="100"></td>
+
+		<td align="left">
+		<form name="Login" action="/facebookapp/login/" method="POST">
+		{% csrf_token %}  
+			<input type="text" placeholder="username" name="username">
+			<input type="password" placeholder="password" name="password">	
+			<input type="submit" value="login" ><br>
+			
+			
+			
+		    
+		</form>
+	
+		</td>
+		</tr>
+		<tr bgcolor="#edf0f5" height="600px">
+		<td valign="top" align="center"><br><br><br>
+                    <table border="0" width="80%">
+					<tr>
+						<td><h2><font face="verdana">Connect with friends and the world around you on facebook.</font></h2></td></tr>
+							<td><img src="{% static '\connect.jpg' %}" width="450" height="200"></td>
+							
+					</table>
+							
+			<td valign="top">
+				{{message}}
+				<h1>Creating an account</h1>
+				its free and always will be<br><br>
+
+	<form name="Register" action="/facebookapp/facebook/"  method="POST">	
+		{% csrf_token %}		
+	            <input type="text" placeholder="first name" style="height: 20px" size="40" name="firstname"><br><br>
+				<input type="text" placeholder="Last name" style="height: 20 px" size="40" name="lastname"><br><br>
+				<input type="text" size="40" placeholder="mobile number or Username" style="height: 20px" name="username"> <br><br>
+				<input type="password" size="40" placeholder="password" style="height: 20px" name="password"> <br><br>
+	 			<input type="password" size="40" placeholder="confirm password" style="height: 20px" name="confirmpassword"><br><br>
+				Birthday
+				 <input type="date" name="dob">
+				
+               <br>
+            <font size="1" color="blue">why do i need to provide <br>my date of birth?</font><br><br>
+            <input type="radio" name="gender" value="female" size="10"><span class="gender">Female</span>
+            <input type="radio" name="gender" value="male" size="10" ><span class="gender">Male</span><br><br>
+			<font color="#666666" face="verdana,Arial,helvetica,sans-serif" size="1">by clicking sign up ,you agree to our
+			<font  color="blue"> terms </font> and that you have<br> read our data use policy,
+			<font color="blue">including</font> our cookie use.</font> <br><br>
+					
+			<input  type="submit" style="background-color:green; color:white; width: 180px; height: 30px;"  value="Create an account" 
+				onclick="return submitFun()">
+				
+		</form>			
+		  </td></td></tr></table>
+		  
+
+        <script type="text/javascript">
+		 
+			function submitFun(){
+ 				counter = 0
+			    firstname       = document.forms["Register"]["firstname"];
+				lastname        = document.forms["Register"]["lastname"];
+				username        = document.forms['Register']['username'];
+				password        = document.forms['Register']['password'];
+				confirmpassword = document.forms['Register']['confirmpassword'];
+				dob             = document.forms['Register']['dob'];
+				gender          = document.forms['Register']['gender'];
+			
+				if(firstname.value == ""){
+						firstname.style.borderColor = 'red';
+						counter += 1;
+				}
+				if(lastname.value == ""){
+					   lastname.style.borderColor = 'red';
+					   counter += 1;
+				}
+				if(username.value == ""){
+					username.style.borderColor= 'red';
+					counter += 1;
+				}
+				if(password.value == ""){
+					password.style.borderColor= 'red';
+					counter += 1;
+				}
+				if(confirmpassword.value == ""){
+					confirmpassword.style.borderColor= 'red';
+					counter += 1;
+				}
+				if(password.value != confirmpassword.value){
+					password.style.borderColor= 'red';
+					confirmpassword.style.borderColor= 'red';
+					alert('password mismatching ');
+					counter +=1;
+				}
+				if (dob.value == ""){
+					dob.style.borderColor = 'light red';
+					counter += 1;
+				}
+				if (gender[0].checked == false & gender[1].checked == false){
+					document.getElementsByClassName('gender')[0].style.color = 'red';
+					document.getElementsByClassName('gender')[1].style.color = 'red';
+				}
+				if (counter > 0) {
+					return false;
+				}
+			}
+		</script>
+
+
+
+
+			
+</body>
+				
+			
+
+</html>
+
+
+
+
+

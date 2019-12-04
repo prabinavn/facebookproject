@@ -1,0 +1,31 @@
+{% extends 'home.html'%}
+{% block content %}
+{% load static %}
+
+
+
+
+<form action="/facebookapp/profile/" enctype="multipart/form-data" method="POST" name="profile">
+    {% csrf_token %}
+    <h3 class="text-primary"> Profile </h3>
+    <br>
+    <div class="form-group">
+        {% if data.image %}
+            <img src="{{data.image.url}}" width="100px" class="img-responsive">
+        {% else %}
+            <img src="{% static 'user.png' %}" width="100px" class="img-responsive" />
+        {% endif %}
+        <br>
+        <input type="file" id="profilepic" name="profilepic" style="display: none" />
+        <br><br>
+        <span class="text-primary">First Name </span>
+        <input class="form-control" type="text" id="fname" name="firstname" value='{{ data.firstname }}' readonly/><br><br>
+        <span class="text-primary">Last Name </span>
+        <input class="form-control" type="text" id="lname"  name="lastname" value='{{ data.lastname }}' readonly/><br><br>
+        <input type="button" id="btneditprofile" value="Edit profile" class="btn btn-primary" />
+        <input type="submit" id="btnupdateprofile" value="Update Profile" class="btn btn-success" style="display: none" />
+
+    </div>
+</form>
+
+{% endblock %}
